@@ -1,1 +1,2 @@
 # atcoder-slack-notification
+Atcoderの開催日を自動で通知してくれるSlackBot
