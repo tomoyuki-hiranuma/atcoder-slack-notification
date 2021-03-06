@@ -12,7 +12,6 @@ def make_message(channel,slack,s,message):
         message = message + "\n" + i[0] + "\n" + i[1] + "\n"
     slack.chat.post_message(channel, message, as_user=True)
 
-
     '''
     メッセージを一つにするために変更した
     slack.chat.post_message(channel, message, as_user=True)
@@ -21,7 +20,6 @@ def make_message(channel,slack,s,message):
         slack.chat.post_message(channel,i[1],as_user=True,unfurl_links=True)
         #slack.chat.post_message(channel,i[2],as_user=True,unfurl_links=True)
     '''
-
 
 #チャンネルのアプリを追加できているかの確認
 def info(channel,slack):

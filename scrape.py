@@ -10,13 +10,14 @@ def scrape_active():
     html = request.urlopen(url)
     soup = BeautifulSoup(html, "html.parser")
     contests_all = soup.find("div", id="contest-table-active")
-    #コンテストがなかった場合
+
     if contests_all is None:
         return re_contests
+
     contests_tbody_tag = contests_all.find("tbody")
     upcoming_contests = contests_tbody_tag.find_all("tr")
     #コンテスト情報をre_contestsに格納
-    #コンテストのurlと終了の日時のみ
+    # ['title', 'start_date', 'end_date', 'url']
     for c in upcoming_contests:
         re_contests_sub = []
         #コンテストページのurlを取ってurl2に格納
@@ -24,25 +25,31 @@ def scrape_active():
         url2 = url+d.get("href")
         html2 = request.urlopen(url2)
         soup2 = BeautifulSoup(html2, "html.parser")
-        #classは予約後なのでclass_
+
+        title = soup2.find("h1", class_="text-center")
+        re_contests_sub.append(title.text)
+
         sftime = soup2.find_all("time", class_="fixtime-full")
-        #終了の時間のみをre_contests_subに格納
-        re_contests_sub.append(sftime[1].text + " 終了")
-        #コンテストページのurlもre_contests_subに格納
+        re_contests_sub.append(sftime[0].text.split("+")[0] + " 開始")
+        re_contests_sub.append(sftime[1].text.split("+")[0] + " 終了")
+
         re_contests_sub.append(url2)
+
         re_contests.append(re_contests_sub)
     return re_contests
 
-
+# ['title', 'start_date', 'end_date', 'url']
+# 明日コンテストがあれば呼ばれる
 def scrape_upcoming():
     re_contests = []
     url = "https://atcoder.jp"
     html = request.urlopen(url)
     soup = BeautifulSoup(html, "html.parser")
     contests_all=soup.find("div", id="contest-table-upcoming")
-    #コンテストがなかった場合
+
     if contests_all is None:
         return re_contests
+
     contests_tbody_tag = contests_all.find("tbody")
     upcoming_contests = contests_tbody_tag.find_all("tr")
     #その週にコンテストあるかどうかの判定のために今日の日時を取得
@@ -81,5 +88,5 @@ def timetostr(date_sub):
         date_sub.year, date_sub.month, date_sub.day, W[date_sub.weekday()], date_sub.hour, str(date_sub.minute).ljust(2, "0")
     ))
 
-print(scrape_active())
-print(scrape_upcoming())
+# print(scrape_active())
+# print(scrape_upcoming())
