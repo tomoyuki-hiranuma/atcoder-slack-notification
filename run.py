@@ -23,8 +23,8 @@ def make_message(channel,slack,s,message):
 
 #チャンネルのアプリを追加できているかの確認
 def info(channel,slack):
-    active_contests=scrape.scrape_active()
-    upcoming_contests=scrape.scrape_upcoming()
+    active_contests = scrape.scrape_active()
+    upcoming_contests = scrape.scrape_upcoming()
     if len(active_contests)!= 0:
         make_message(channel,slack,active_contests,"*[開催中のコンテスト一覧]*")
     else:
@@ -37,7 +37,7 @@ def info(channel,slack):
 def main():
     channel = "kyo-pro"
     slack = Slacker(slackbot_settings.API_TOKEN)
-    if datetime.datetime.today().weekday()==0:
+    if datetime.datetime.today().weekday() == 0:
         info(channel,slack)
     bot = Bot()
     bot.run()

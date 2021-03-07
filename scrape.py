@@ -65,6 +65,9 @@ def scrape_upcoming():
         #月曜日に実行を行うのでその週の日曜までにないコンテストは格納しなくて良い
         if (t - w).days >= 7:
             break
+
+        title = c.find('a', href=re.compile("contests"))
+        re_contests_sub.append(title.text)
         #formatを統一するためにtimetostr関数を使う
         re_contests_sub.append(timetostr(t) + " 開始")
         d2 = c.find("a",href=re.compile("contests"))
