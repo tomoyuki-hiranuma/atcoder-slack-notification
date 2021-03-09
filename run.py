@@ -35,10 +35,15 @@ def info(channel,slack):
         slack.chat.post_message(channel,"*今週のコンテストはありません*",as_user=True)
 
 def main():
-    channel = "kyo-pro"
-    slack = Slacker(slackbot_settings.API_TOKEN)
-    if datetime.datetime.today().weekday() == 0:
-        info(channel,slack)
+    '''
+        TODO
+        指定した時間の時に動く
+        メッセージ飛ばすと特定のメソッドが動くようにする
+    '''
+    # channel = "kyo-pro"
+    # slack = Slacker(slackbot_settings.API_TOKEN)
+    # if datetime.datetime.today().weekday() == 0:
+        # info(channel,slack)
     bot = Bot()
     bot.run()
 
