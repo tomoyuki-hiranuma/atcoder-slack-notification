@@ -9,10 +9,8 @@ from run import info
 import slackbot_settings
 
 def select_question():
-  random.seed(datetime.date.today().day
-  '''
-  スクレイピングで最大値取得
-  '''
+  random.seed(datetime.date.today().day)
+  #スクレイピングで最大値取得
   max_contest_number = 194
   contest = random.randint(1, max_contest_number + 1)
   tasks = ['a', 'b', 'c', 'd']
