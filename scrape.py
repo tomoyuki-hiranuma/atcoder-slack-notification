@@ -91,5 +91,5 @@ def timetostr(date_sub):
         date_sub.year, date_sub.month, date_sub.day, W[date_sub.weekday()], date_sub.hour, str(date_sub.minute).ljust(2, "0")
     ))
 
-# print(scrape_active())
-# print(scrape_upcoming())
+def strtotime_date(date_str):
+    return datetime.datetime.strptime(date_str, '%Y-%m-%d')
