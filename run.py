@@ -13,9 +13,9 @@ def make_message(channel,slack,s,message):
     引数にいくつ出力か指定しても良いかも
     '''
     message += "\n"
-    for i in s:
-        message += "\n".join(i)
-        message += "\n"
+    for contest in s:
+        for i in range(len(contest) - 1):
+            message += contest[i] + "\n"
     slack.chat.post_message(channel, message, as_user=True)
 
 #チャンネルのアプリを追加できているかの確認
@@ -38,7 +38,6 @@ def anounce_contest_today(today, slack, channel):
         if today == contest_date:
             message = "【告知】\n今日のコンテスト\n"
             message += "\n".join(contest)
-            print(message)
             slack.chat.post_message(channel, message, as_user=True)
 
 def anounce_contest_before_day(today, slack, channel):
@@ -51,21 +50,6 @@ def anounce_contest_before_day(today, slack, channel):
             slack.chat.post_message(channel, message, as_user=True)
 
 def main():
-    '''
-        TODO
-        指定した時間の時に動く
-        メッセージ飛ばすと特定のメソッドが動くようにする
-    '''
-    channel = slackbot_settings.CHANNEL
-    slack = Slacker(slackbot_settings.API_TOKEN)
-    '''
-        金土日のみ動く
-    '''
-    DATE = ["月","火","水","木","金","土","日"]
-    check_date = ["金", "土", "日"]
-    if DATE[datetime.datetime.today().weekday()] in check_date:
-        anounce_contest_today(datetime.datetime.today(), slack, channel)
-        anounce_contest_before_day(datetime.datetime.today(), slack, channel)
     bot = Bot()
     bot.run()
 

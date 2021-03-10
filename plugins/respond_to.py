@@ -1,5 +1,6 @@
 import sys
 from slackbot.bot import respond_to
+from slacker import Slacker
 sys.path.append('..')
 from run import info
 import slackbot_settings
