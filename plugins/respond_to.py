@@ -27,7 +27,6 @@ def when_is_contest(message):
 
 @respond_to("問")
 def post_today_question(message):
-  slack = Slacker(slackbot_settings.API_TOKEN)
-  message = "【今日の1問】\n"
-  message += select_question() + "\n"
-  slack.chat.post_message(slackbot_settings.CHANNEL, message, as_user=True)
+  text = "【今日の1問】\n"
+  text += select_question() + "\n"
+  message.reply(text)
