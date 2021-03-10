@@ -4,12 +4,13 @@ from slacker import Slacker
 import numpy as np
 import random
 import datetime
+from pytz import timezone
 sys.path.append('..')
 from run import info
 import slackbot_settings
 
 def select_question():
-  random.seed(datetime.date.today().day)
+  random.seed(datetime.datetime.now(timezone('Asia/Tokyo')).day)
   #スクレイピングで最大値取得
   max_contest_number = 194
   contest = random.randint(1, max_contest_number + 1)
